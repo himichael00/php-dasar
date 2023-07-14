@@ -102,7 +102,7 @@ $(document).ready(function(){
             <td><img src="img/<?php echo $product["picture"]; ?>" width="50"></td>
             <td>
                 <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> |
-                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                <a href="delete.php?id=<?php echo $product["id"]; ?>"><i class="material-icons">&#xE872;</i></a>
             </td>
         </tr>
         <?php $i++; ?>

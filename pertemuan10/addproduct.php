@@ -1,28 +1,21 @@
 <?php
-// koneksi ke DB
-$dbconn = mysqli_connect("localhost", "root", "", "phpdasar");
-
-
+require 'functions.php';
 // cek apakah tombol sudah di submit belum
 if( isset($_POST["submit"])) {
-    // ambil data dari tiap elemen dalam form
-    $label = $_POST["label"];
-    $size = $_POST["size"];
-    $type = $_POST["type"];
-    $price = $_POST["price"];
-    $picture = $_POST["picture"];
-
-    // query insert data
-    $query = "INSERT INTO tokoban VALUES ('', '$label', '$size', '$type', '$price', '$picture')";
-
-    mysqli_query($dbconn, $query);
 
     // cek keberhasilan data
-    if (mysqli_affected_rows($dbconn) > 0) {
-        echo "Data sucessfully added";
+    if (tambah($_POST) > 0) {
+        echo "<script>
+                alert('data succesfully added');
+                document.location.href = 'index.php';
+            </script>
+        ";
     } else {
-        echo "Adding Data Failed";
-        var_dump(mysqli_error($dbconn));
+        echo "<script>
+                alert('data add failed');
+                document.location.href = 'addproduct.php';
+            </script>
+        ";
     }
 }
 
@@ -43,19 +36,19 @@ if( isset($_POST["submit"])) {
         <ul>
             <li>
                 <label for="label">Label Product : </label>
-                <input type="text" name="label" id="label">
+                <input type="text" name="label" id="label" required>
             </li>
             <li>
                 <label for="size">Size : </label>
-                <input type="text" name="size" id="size">
+                <input type="text" name="size" id="size" required>
             </li>
             <li>
                 <label for="type">Type : </label>
-                <input type="text" name="type" id="type">
+                <input type="text" name="type" id="type" required>
             </li>
             <li>
                 <label for="price">Price : </label>
-                <input type="text" name="price" id="price">
+                <input type="text" name="price" id="price" required>
             </li>
             <li>
                 <label for="picture">Picture Product : </label>
