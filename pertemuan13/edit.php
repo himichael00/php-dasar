@@ -39,8 +39,9 @@ if( isset($_POST["submit"])) {
 <body>
     <h1>Edit Data Product</h1>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $products["id"]; ?>">
+        <input type="hidden" name="oldpicture" value="<?= $products["picture"]; ?>">
         <ul>
             <li>
                 <label for="label">Label Product : </label>
@@ -64,8 +65,8 @@ if( isset($_POST["submit"])) {
             </li>
             <li>
                 <label for="picture">Picture Product : </label>
-                <input type="text" name="picture" id="picture"
-                value="<?php echo $products["picture"]; ?>">
+                <img src="img/<?php echo $products["picture"]; ?>" width="80"> <br>
+                <input type="file" name="picture" id="picture">
             </li>
                 <button class="btn btn-primary" type="submit" name="submit">
                     Submit

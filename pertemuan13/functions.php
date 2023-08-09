@@ -66,7 +66,14 @@ function upload() {
             </script>";
     }
 
-    // 
+    // lolos pengecekan, gambar akan di upload
+    // generate nama file gambar baru
+    $newnamefile = uniqid();
+    $newnamefile .= '.';
+    $newnamefile .= $validpicture;
+    move_uploaded_file($tmpname, 'img/' . $newnamefile);
+
+    return $newnamefile;
 }
 
 function hapus($id) {
@@ -85,7 +92,15 @@ function ubah($data) {
     $size = htmlspecialchars($data["size"]);
     $tipe = htmlspecialchars($data["tipe"]);
     $price = htmlspecialchars($data["price"]);
-    $picture = htmlspecialchars($data["picture"]);
+    $oldpicture = htmlspecialchars($data["oldpicture"]);
+    
+    // cek apakah user pilih gambar baru?
+
+    if ($_FILES['picture']['error'] === 4) {
+        $picture = $oldpicture;
+    } else {
+        $picture = upload();
+    }
 
     // query insert data
     $query = "UPDATE tokoban SET label = '$label', size = '$size', tipe = '$tipe', price = '$price', picture = '$picture' WHERE id = $id";
