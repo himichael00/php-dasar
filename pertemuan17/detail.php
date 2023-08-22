@@ -1,6 +1,10 @@
 <?php
 require 'functions.php';
-$products = query("SELECT * FROM tokoban");
+// ambil data id
+$id = $_GET["id"];
+
+// query data products berdasarkan id
+$products = query("SELECT * FROM tokoban WHERE id = $id")[0];
 ?>
 
 
@@ -9,7 +13,7 @@ $products = query("SELECT * FROM tokoban");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Details Products</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -74,32 +78,18 @@ $(document).ready(function(){
 </head>
 <body>
     
+    <div class="container">
     <h1>List of products</h1>
 
-    <div class="container">
-        <div class="row">
-        <?php $i = 0; ?>
-            <?php foreach($products as $product) : ?>
-                <?php if($i % 3 === 0): ?>
-                    </div>
-                    <div class="row">
-                <?php endif; ?>
-            <div class="col-4">
-                <div class="card mb-3" style="width: 18rem;">
-                    <img src="img/<?php echo $product["picture"]; ?>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $product["label"]; ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $product["size"]; ?></h6>
-                        <p class="card-text"><?php echo $product["tipe"]; ?></p>
-                        <p class="card-text"><?php echo $product["price"]; ?></p>
-                        <a href="detail.php?id=<?php echo $product["id"]; ?>">link</a>
-                    </div>
-                </div>
-            </div>
-        <?php $i++; ?>
-            <?php endforeach; ?>
+        <div class="card mb-3">
+            <img class="card-img-top" src="img/<?php echo $products["picture"]; ?>" style="max-width: autopx; height: 200px;" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $products["label"]; ?></h5>
+                <p class="card-text"><?php echo $products["tipe"]; ?></p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
+    </div>
         
 
 </body>
